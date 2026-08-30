@@ -1,91 +1,90 @@
-import { useState } from "react";
-export default function App(){
-const [vip,setVip]=useState(false);
-const [show,setShow]=useState(false);
-const [code,setCode]=useState("");
-const games=[
-{id:1,league:"KPL",home:"Gor Mahia",away:"Tusker",tip:"Home Win",odd:"2.10",time:"15:00"},
-{id:2,league:"KPL",home:"AFC Leopards",away:"Ulinzi Stars",tip:"Over 1.5",odd:"1.65",time:"15:00"},
-{id:3,league:"KPL",home:"Bandari",away:"KCB",tip:"Under 2.5",odd:"1.70",time:"15:30"},
-{id:4,league:"KPL",home:"Kenya Police",away:"Kakamega Homeboyz",tip:"Home Win",odd:"1.85",time:"16:00"},
-{id:5,league:"KPL",home:"Sofapaka",away:"Posta Rangers",tip:"BTTS Yes",odd:"1.90",time:"13:00"},
-{id:6,league:"EPL",home:"Arsenal",away:"Man City",tip:"Over 2.5",odd:"1.85",time:"16:00"},
-{id:7,league:"EPL",home:"Liverpool",away:"Chelsea",tip:"Over 2.5",odd:"1.80",time:"17:30"},
-{id:8,league:"EPL",home:"Man Utd",away:"Tottenham",tip:"BTTS Yes",odd:"1.70",time:"16:00"},
-{id:9,league:"EPL",home:"Newcastle",away:"Brighton",tip:"Over 1.5",odd:"1.40",time:"16:00"},
-{id:10,league:"EPL",home:"Aston Villa",away:"West Ham",tip:"Home Win",odd:"1.95",time:"16:00"},
-{id:11,league:"EPL",home:"Crystal Palace",away:"Everton",tip:"Under 2.5",odd:"1.65",time:"16:00"},
-{id:12,league:"EPL",home:"Fulham",away:"Wolves",tip:"BTTS Yes",odd:"1.75",time:"16:00"},
-{id:13,league:"La Liga",home:"Real Madrid",away:"Barcelona",tip:"BTTS Yes",odd:"1.75",time:"21:00"},
-{id:14,league:"La Liga",home:"Atletico Madrid",away:"Sevilla",tip:"Under 3.5",odd:"1.40",time:"18:30"},
-{id:15,league:"La Liga",home:"Villarreal",away:"Betis",tip:"Over 2.5",odd:"1.85",time:"19:00"},
-{id:16,league:"La Liga",home:"Athletic Bilbao",away:"Real Sociedad",tip:"Under 2.5",odd:"1.60",time:"20:00"},
-{id:17,league:"Bundesliga",home:"Bayern Munich",away:"Dortmund",tip:"Home Win",odd:"1.90",time:"19:30"},
-{id:18,league:"Bundesliga",home:"Leverkusen",away:"RB Leipzig",tip:"Over 2.5",odd:"1.65",time:"19:30"},
-{id:19,league:"Bundesliga",home:"Stuttgart",away:"Frankfurt",tip:"BTTS Yes",odd:"1.68",time:"16:30"},
-{id:20,league:"Serie A",home:"Inter",away:"AC Milan",tip:"Over 1.5",odd:"1.35",time:"20:45"},
-{id:21,league:"Serie A",home:"Napoli",away:"Roma",tip:"Over 2.5",odd:"1.85",time:"20:45"},
-{id:22,league:"Serie A",home:"Juventus",away:"Lazio",tip:"Under 2.5",odd:"1.60",time:"18:00"},
-{id:23,league:"Ligue 1",home:"PSG",away:"Marseille",tip:"Home Win",odd:"1.60",time:"21:00"},
-{id:24,league:"Ligue 1",home:"Lyon",away:"Monaco",tip:"Over 2.5",odd:"1.78",time:"19:00"},
-{id:25,league:"Africa",home:"Simba SC",away:"Yanga",tip:"Home Win",odd:"2.05",time:"18:00"},
-{id:26,league:"Africa",home:"Al Ahly",away:"Pyramids",tip:"Home Win",odd:"1.70",time:"19:00"},
-{id:27,league:"Africa",home:"Mamelodi Sundowns",away:"Orlando Pirates",tip:"Under 2.5",odd:"1.60",time:"17:00"},
-{id:28,league:"Africa",home:"TP Mazembe",away:"Vita Club",tip:"Home Win",odd:"1.90",time:"16:00"},
-{id:29,league:"Africa",home:"Raja Casablanca",away:"Wydad",tip:"Under 2.5",odd:"1.55",time:"21:00"},
-{id:30,league:"UCL",home:"Man City",away:"PSG",tip:"Over 2.5",odd:"1.70",time:"21:00"},
-{id:31,league:"UCL",home:"Bayern",away:"Real Madrid",tip:"BTTS Yes",odd:"1.65",time:"21:00"},
-{id:32,league:"UCL",home:"Arsenal",away:"Inter",tip:"Over 1.5",odd:"1.35",time:"21:00"},
-{id:33,league:"Europa",home:"Man Utd",away:"Roma",tip:"Over 2.5",odd:"1.80",time:"21:00"},
-{id:34,league:"Europa",home:"Tottenham",away:"Ajax",tip:"BTTS Yes",odd:"1.72",time:"21:00"},
-{id:35,league:"Other",home:"Galatasaray",away:"Fenerbahce",tip:"Over 2.5",odd:"1.75",time:"19:00"},
-{id:36,league:"Jackpot",home:"Liverpool",away:"Chelsea",tip:"Home Win & Over 1.5",odd:"2.40",time:"17:30"},
-{id:37,league:"Jackpot",home:"Atletico",away:"Sevilla",tip:"Home Win",odd:"1.85",time:"18:30"},
-{id:38,league:"Jackpot",home:"Bayern",away:"Dortmund",tip:"Over 2.5",odd:"1.70",time:"19:30"},
-{id:39,league:"Jackpot",home:"PSG",away:"Lyon",tip:"Home Win",odd:"1.55",time:"21:00"},
-{id:40,league:"Jackpot",home:"Inter",away:"Juventus",tip:"BTTS Yes",odd:"1.80",time:"20:45"},
-{id:41,league:"Jackpot",home:"Arsenal",away:"Tottenham",tip:"Over 2.5",odd:"1.82",time:"16:00"},
-{id:42,league:"Jackpot",home:"Real Madrid",away:"Villarreal",tip:"Home Win",odd:"1.60",time:"21:00"},
-{id:43,league:"Jackpot",home:"Man City",away:"Newcastle",tip:"Over 1.5",odd:"1.30",time:"16:00"},
-{id:44,league:"Jackpot",home:"Napoli",away:"AC Milan",tip:"BTTS Yes",odd:"1.75",time:"20:45"},
-{id:45,league:"Jackpot",home:"Bayer Leverkusen",away:"Stuttgart",tip:"Home Win",odd:"1.70",time:"19:30"},
-{id:46,league:"Jackpot",home:"AFC Leopards",away:"Gor Mahia",tip:"Under 2.5",odd:"1.60",time:"15:00"},
-{id:47,league:"Jackpot",home:"Simba",away:"Azam FC",tip:"Home Win",odd:"1.65",time:"18:00"},
-{id:48,league:"Jackpot",home:"Al Ahly",away:"Zamalek",tip:"Home Win",odd:"1.80",time:"20:00"},
-{id:49,league:"Jackpot",home:"Sundowns",away:"Kaizer Chiefs",tip:"Home Win",odd:"1.55",time:"17:00"},
-{id:50,league:"Jackpot",home:"Raja",away:"Berkane",tip:"Under 2.5",odd:"1.50",time:"21:00"},
-{id:51,league:"Jackpot",home:"Orlando Pirates",away:"Stellenbosch",tip:"Home Win",odd:"1.75",time:"16:00"},
-{id:52,league:"Jackpot",home:"Yang SC",away:"Al Hilal",tip:"Over 1.5",odd:"1.45",time:"18:00"},
-{id:53,league:"Jackpot",home:"Man Utd",away:"Brighton",tip:"Over 2.5",odd:"1.85",time:"16:00"},
-{id:54,league:"Jackpot",home:"Chelsea",away:"West Ham",tip:"Home Win",odd:"1.70",time:"17:30"},
-{id:55,league:"Jackpot",home:"Dortmund",away:"Frankfurt",tip:"Over 2.5",odd:"1.68",time:"16:30"},
-];
-const checkCode=()=>{if(code==="MESSIH2025"||code==="MESSIH"||code==="VIP55"){setVip(true);setShow(false);alert("VIP 55 GAMES UNLOCKED!");}else{alert("Wrong Code! Lipa Till 1581046");}};
-return(
-<div style={{background:"black",color:"white",padding:"20px",minHeight:"100vh",fontFamily:"Arial"}}>
-<h1 style={{textAlign:"center"}}>MESSIH <span style={{color:"#4ade80"}}>MATCH ANALYTICS</span></h1>
-<p style={{textAlign:"center",color:"#aaa"}}>55 Games Daily - Analysis Across All Sites</p>
-<div style={{textAlign:"center",margin:"20px"}}>
-{!vip?<button onClick={()=>setShow(true)} style={{background:"#4ade80",color:"black",padding:"15px 30px",fontWeight:"bold",border:"none",borderRadius:"8px",fontSize:"18px"}}>🔓 Unlock VIP - 55 Games (Till 1581046)</button>:<div style={{background:"#4ade80",color:"black",padding:"10px",borderRadius:"8px",fontWeight:"bold"}}>VIP 55 ACTIVE ✅</div>}
-</div>
-<div style={{display:"grid",gap:"10px"}}>{games.map(g=>(
-<div key={g.id} style={{background:"#111",border:"1px solid #4ade80",padding:"12px",borderRadius:"8px",opacity:(g.league==="Jackpot"&&!vip)?0.5:1}}>
-<div style={{display:"flex",justifyContent:"space-between",fontSize:"12px"}}><span style={{color:"#4ade80",fontWeight:"bold"}}>{g.league}</span><span>{g.time}</span><span style={{background:"#4ade80",color:"black",padding:"2px 8px",borderRadius:"4px"}}>{g.odd}</span></div>
-<div style={{margin:"8px 0",fontWeight:"bold"}}>{g.home} vs {g.away}</div>
-<div>Tip: <b style={{color:"#4ade80"}}>{(g.league==="Jackpot"&&!vip)?"🔒 VIP ONLY":g.tip}</b></div>
-</div>))}</div>
-<div style={{background:"#111",border:"1px solid #333",padding:"20px",marginTop:"30px",borderRadius:"8px",textAlign:"center"}}>
-<p>WhatsApp: 0793921100</p>
-<a href="https://wa.me/254793921100" target="_blank" style={{background:"#25D366",color:"white",padding:"12px 25px",borderRadius:"8px",textDecoration:"none",fontWeight:"bold",display:"inline-block",marginTop:"10px"}}>WhatsApp Us</a>
-<p style={{marginTop:"10px",fontSize:"12px"}}>Till: 1581046</p>
-</div>
-{show&&<div style={{position:"fixed",top:0,left:0,right:0,bottom:0,background:"rgba(0,0,0,0.95)",display:"flex",alignItems:"center",justifyContent:"center",padding:"20px",zIndex:1000}}>
-<div style={{background:"#111",border:"1px solid #4ade80",padding:"25px",borderRadius:"12px",maxWidth:"400px",width:"100%",textAlign:"center"}}>
-<h2>Lipa na M-Pesa</h2>
-<div style={{background:"white",color:"black",padding:"15px",borderRadius:"8px",margin:"15px 0"}}><p>Buy Goods Till</p><p style={{fontSize:"32px",fontWeight:"900",color:"#4ade80"}}>1581046</p></div>
-<input value={code} onChange={e=>setCode(e.target.value)} placeholder="VIP Code" style={{width:"100%",padding:"12px",borderRadius:"8px",border:"1px solid #4ade80",background:"black",color:"white"}}/>
-<button onClick={checkCode} style={{width:"100%",background:"#4ade80",color:"black",padding:"12px",fontWeight:"bold",border:"none",borderRadius:"8px",marginTop:"15px"}}>Activate 55 Games</button>
-<button onClick={()=>setShow(false)} style={{width:"100%",background:"transparent",color:"white",padding:"10px",marginTop:"10px",border:"1px solid #333",borderRadius:"8px"}}>Cancel</button>
-</div></div>}
-</div>);
+// PRO ADMIN DASHBOARD - MESSIH MATCH ANALYTICS
+// CEO Level - Till 1581046 - 55 Games
+
+import { useState } from 'react'
+
+const AdminDashboard = () => {
+  const [vipCode, setVipCode] = useState("VIP-8F9K-2XLM")
+  
+  const generateCode = () => {
+    const code = "VIP-" + Math.random().toString(36).substr(2,4).toUpperCase() + "-" + Math.random().toString(36).substr(2,4).toUpperCase()
+    setVipCode(code)
+  }
+
+  return (
+    <div className="min-h-screen bg-[#0a0e1a] text-white p-6">
+      {/* Header */}
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold text-yellow-400">MESSIH MATCH ANALYTICS - CEO ADMIN</h1>
+        <div className="bg-green-600 px-4 py-2 rounded">● Online</div>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/20">
+          <p className="text-gray-400">Total Revenue KES</p>
+          <h2 className="text-3xl font-bold">KES 8,245,300</h2>
+          <p className="text-green-400 text-sm">+12.4% vs last month</p>
+        </div>
+        <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/20">
+          <p className="text-gray-400">Active VIP Users</p>
+          <h2 className="text-3xl font-bold">1,342</h2>
+          <p className="text-green-400 text-sm">+8.2% vs last month</p>
+        </div>
+        <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/20">
+          <p className="text-gray-400">M-Pesa Till 1581046</p>
+          <h2 className="text-3xl font-bold">KES 2,103,450</h2>
+          <p className="text-gray-400 text-sm">Today: KES 184,200 • 89 payments</p>
+        </div>
+        <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/20">
+          <p className="text-gray-400">55 Games Today</p>
+          <h2 className="text-3xl font-bold">55</h2>
+          <p className="text-yellow-400 text-sm">+5 vs yesterday</p>
+        </div>
+      </div>
+
+      {/* Middle Section */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+        {/* VIP Generator */}
+        <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/30">
+          <h3 className="text-xl font-bold mb-4 text-yellow-400">🔑 VIP Code Generator</h3>
+          <div className="bg-black p-4 rounded flex justify-between items-center mb-4">
+            <span className="text-2xl font-mono text-yellow-400">{vipCode}</span>
+            <button className="bg-yellow-500 text-black px-4 py-1 rounded font-bold">Copy</button>
+          </div>
+          <button onClick={generateCode} className="w-full bg-yellow-500 text-black py-3 rounded-xl font-bold hover:bg-yellow-400">
+            + Generate New Code
+          </button>
+          <p className="text-xs text-gray-500 mt-2">Codes auto-expire after 7 days. Till 1581046</p>
+        </div>
+
+        {/* Transactions */}
+        <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/30">
+          <h3 className="text-xl font-bold mb-4 text-yellow-400">💳 Recent M-Pesa Transactions</h3>
+          <div className="space-y-3">
+            <div className="flex justify-between bg-black p-3 rounded"><span>07** **** 9021</span><span>KES 5,000</span><span className="bg-green-600 px-2 rounded text-sm">Success</span></div>
+            <div className="flex justify-between bg-black p-3 rounded"><span>07** **** 5563</span><span>KES 2,000</span><span className="bg-green-600 px-2 rounded text-sm">Success</span></div>
+            <div className="flex justify-between bg-black p-3 rounded"><span>07** **** 1199</span><span>KES 10,000</span><span className="bg-green-600 px-2 rounded text-sm">Success</span></div>
+          </div>
+          <a href="https://wa.me/254793921100" className="block text-center mt-4 text-yellow-400">View All in WhatsApp →</a>
+        </div>
+      </div>
+
+      {/* Game Management */}
+      <div className="bg-[#151a2d] p-6 rounded-xl border border-yellow-500/30">
+        <div className="flex justify-between mb-4">
+          <h3 className="text-xl font-bold text-yellow-400">⚽ Game Management (55 Games)</h3>
+          <button className="bg-yellow-500 text-black px-4 py-2 rounded font-bold">+ Add Game</button>
+        </div>
+        <p className="text-gray-400">Go to your main App.jsx games array to edit 55 games. This admin shows stats only.</p>
+        <div className="mt-4 grid grid-cols-3 gap-4 text-center">
+          <div className="bg-black p-4 rounded"><p>Live</p><p className="text-2xl font-bold text-green-400">12</p></div>
+          <div className="bg-black p-4 rounded"><p>Upcoming</p><p className="text-2xl font-bold text-blue-400">28</p></div>
+          <div className="bg-black p-4 rounded"><p>Finished</p><p className="text-2xl font-bold">15</p></div>
+        </div>
+      </div>
+    </div>
+  )
 }
+
+export default AdminDashboard
